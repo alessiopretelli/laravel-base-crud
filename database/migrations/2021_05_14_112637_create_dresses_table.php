@@ -15,9 +15,10 @@ class CreateDressesTable extends Migration
     {
         Schema::create('dresses', function (Blueprint $table) {
             $table->id();
+            $table->string('brand', 50);
             $table->string('type', 50);
             $table->string('color', 50);
-            $table->float('price', 6,2);
+            $table->float('price', 5,2);
             $table->string('size', 5);
             $table->timestamps();
         });

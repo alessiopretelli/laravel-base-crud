@@ -14,7 +14,8 @@ class UpdateDressesTable extends Migration
     public function up()
     {
         Schema::table('dresses', function (Blueprint $table) {
-            $table->string('img', 100)->nullable();
+            $table->string('model', 50);
+            $table->string('description', 200);
         });
     }
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Dress;
 
-class DressesController extends Controller
+class DressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,9 @@ class DressesController extends Controller
      */
     public function index()
     {
-        $dresses = Dress::all();
-
-        $data = [
-            'dresses' => $dresses
-        ];
-
-        return view('products', $data);
+        $products = Dress::all();
+        
+        return view('products', compact('products'));
     }
 
     /**
@@ -30,7 +26,7 @@ class DressesController extends Controller
      */
     public function create()
     {
-        //
+        return view('form');
     }
 
     /**
@@ -41,7 +37,21 @@ class DressesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $new_dress = new Dress;
+
+        $new_dress->brand = $data['brand'];
+        $new_dress->type = $data['type'];
+        $new_dress->model = $data['model'];
+        $new_dress->price = $data['price'];
+        $new_dress->size = $data['size'];
+        $new_dress->color = $data['color'];
+        $new_dress->description = $data['description'];
+
+        $new_dress->save();
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -52,15 +62,9 @@ class DressesController extends Controller
      */
     public function show($id)
     {
-        if ($id) {
-            $dress = Dress::find($id);
-            $data = [
-                'dress' => $dress
-            ];
-            
-            return view('details', $data);
-        }
-        abort(404);
+        $product = Dress::find($id);
+
+        return view('details', compact('product'));
     }
 
     /**

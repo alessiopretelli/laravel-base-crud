@@ -5,36 +5,62 @@
 }
 
 header, footer {
-    color: white;
     text-align: center;
     height: 100px;
     width: 100%;
-    line-height: 100px;
-    background-color: crimson;
+    background-color: cornflowerblue;
+}
+
+header h1 a {
+    color: white;
+    text-decoration: none;
+}
+header li {
+    margin: 10px;
+    display: inline-block;
+}
+header li a {
+    color: white;
+    text-decoration: none;
 }
 
 main {
+    text-align: center;
+}
+
+.welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     height: calc(100vh - 200px);
+}
+
+.products {
+    display: flex;
+    flex-direction: column;
+}
+.products .card {
+    margin: 50px 0;
+}
+
+form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    margin: 0 40%;
+    width: 20%;
+    height: calc(100vh - 200px);
 }
-main .products {
-    margin: 50px 0;
+form input {
+    margin: 10px 0;
+}
+
+.product_details {
     display: flex;
-    justify-content: center;
-}
-main .products .card {
-    margin: 0 25px;
-    text-align: center;
-}
-main .products .card img, main .details img {
-    height: 300px;
-}
-main .details {
-    margin: 50px 0;
-    display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 200px);
 }
