@@ -39,15 +39,27 @@ class DressController extends Controller
     {
         $data = $request->all();
 
+        $request->validate([
+            'brand' => 'required|max:50',
+            'type' => 'required|max:50',
+            'color' => 'required|max:50',
+            'price' => 'required|numeric|max:999',
+            'model' => 'required|max:50',
+            'description' => 'required|max:200',
+            'size' => 'required|unique:dresses|max:5'
+        ]);
+
         $new_dress = new Dress;
 
-        $new_dress->brand = $data['brand'];
-        $new_dress->type = $data['type'];
-        $new_dress->model = $data['model'];
-        $new_dress->price = $data['price'];
-        $new_dress->size = $data['size'];
-        $new_dress->color = $data['color'];
-        $new_dress->description = $data['description'];
+        $new_dress->fill($data);
+
+        // $new_dress->brand = $data['brand'];
+        // $new_dress->type = $data['type'];
+        // $new_dress->model = $data['model'];
+        // $new_dress->price = $data['price'];
+        // $new_dress->size = $data['size'];
+        // $new_dress->color = $data['color'];
+        // $new_dress->description = $data['description'];
 
         $new_dress->save();
 
@@ -75,7 +87,10 @@ class DressController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product_to_update = Dress::findOrFail($id);
+        // @dd($product_to_update);
+
+        return view('edit', compact('product_to_update'));
     }
 
     /**
@@ -85,9 +100,14 @@ class DressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dress $product)
     {
-        //
+        // @dd($product);
+        // @dd($request);
+        $data = $request->all();
+        $product->update($data);
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -96,8 +116,10 @@ class DressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dress $product)
     {
-        //
+        $product->delete();
+        
+        return redirect()->route('products.index');
     }
 }

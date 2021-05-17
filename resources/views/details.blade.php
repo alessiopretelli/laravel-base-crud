@@ -9,7 +9,7 @@
     <p>{{$product['brand']}} {{$product['model']}}</p>
     <p>Color: {{$product['color']}}</p>
     <p>Size: {{$product['size']}}</p>
-    <p>{{$product['price']}}$</p>
+    <p>Price: {{$product['price']}}$</p>
     <p>Description: {{$product['description']}}</p>
 </div>
 
